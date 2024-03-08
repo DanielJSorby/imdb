@@ -46,7 +46,7 @@ function searchMovies(searchTerm) {
         }
 
         header.textContent = movie.title;
-        body.textContent = movie.year;
+        body.textContent = "Year: " + movie.year;
         userCardContainer.append(card);
       });
     })
