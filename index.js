@@ -6,6 +6,8 @@ const lastInnStart = 20;
 const url =
   "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json";
 
+
+  
 // Funksjon for å søke gjennom filmene
 function searchMovies(searchTerm) {
   // Henter JSON-data fra URL
@@ -52,16 +54,24 @@ function searchMovies(searchTerm) {
 
         // Oppdater knappens tekst når kortet blir laget
         let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
-        let exists = favourites.some((favMovie) => favMovie.title === movie.title);
-        favouriteButton.textContent = exists ? "Remove from favourites" : "Add to favourites";
+        let exists = favourites.some(
+          (favMovie) => favMovie.title === movie.title
+        );
+        favouriteButton.textContent = exists
+          ? "Remove from favourites"
+          : "Add to favourites";
 
         favouriteButton.addEventListener("click", () => {
           // Sjekk om filmen allerede finnes i favorittlisten
-          exists = favourites.some((favMovie) => favMovie.title === movie.title);
+          exists = favourites.some(
+            (favMovie) => favMovie.title === movie.title
+          );
 
           if (exists) {
             // Hvis filmen allerede finnes, fjern den fra listen
-            favourites = favourites.filter((favMovie) => favMovie.title !== movie.title);
+            favourites = favourites.filter(
+              (favMovie) => favMovie.title !== movie.title
+            );
           } else {
             // Hvis filmen ikke allerede finnes, legg den til i listen
             favourites.push(movie);
@@ -70,7 +80,9 @@ function searchMovies(searchTerm) {
           localStorage.setItem("favourites", JSON.stringify(favourites));
 
           // Oppdater knappens tekst etter at favorittlisten er oppdatert
-          favouriteButton.textContent = exists ? "Add to favourites" : "Remove from favourites";
+          favouriteButton.textContent = exists
+            ? "Add to favourites"
+            : "Remove from favourites";
         });
 
         userCardContainer.append(card);

@@ -1,6 +1,13 @@
+@font-face {
+  font-family: "Filmstrip";
+  src: url("./Fonts/Movie\ Filmstrip.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 html {
-  background-color: #e4543a;
-  color: #e4543a;
+  background-color: #273469;
+  color: #1e2749;
 }
 
 body {
@@ -19,12 +26,18 @@ h1 h2 h3 h4 h5 h6 {
 /* IM-DB */
 
 .logo {
+  font-family: filmstrip;
+  font-weight: 400;
   width: 100%;
   margin: 0 auto;
   padding-top: 6rem;
   text-align: center;
   color: #f5f5f5;
-  font-size: 5rem;
+  font-size: 10rem;
+}
+
+#db {
+  color: #e4d9ff;
 }
 
 /* Search bar */
@@ -88,7 +101,7 @@ margin: 2rem 0;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  max-width: 70rem;
+  max-width: 90rem;
 }
 
 .card {
@@ -101,6 +114,7 @@ margin: 2rem 0;
   border-radius: 0.625rem;
   padding: 3rem;
   overflow: hidden;
+  /*  border: 0.25rem solid #405c73; */
 }
 
 .thumbnail {
@@ -114,7 +128,7 @@ margin: 2rem 0;
 button {
   width: 100%;
   height: 2.8rem;
-  background: #e4543a;
+  background: #1e2749;
   color: #fff;
   border: none;
   border-radius: 1.625rem;
