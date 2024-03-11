@@ -50,59 +50,18 @@ function searchMovies(searchTerm) {
         header.textContent = movie.title;
         body.textContent = "Year: " + movie.year;
 
-        // Funksjon for å oppdatere knappens tekst
-        function updateButtonText(favourites, movie, button) {
-          favourites.map((favMovie) => {
-            if (favMovie.id === movie.id) {
-              button.textContent = "Remove from favourites";
-            } else {
-              button.textContent = "Add to favourites";
-            }
-          });
-          /* let exists = favourites.some((favMovie) => favMovie.id === movie.id);
-          button.textContent == exists
-            ? "Remove from favourites"
-            : "Add to favourites"; */
-        }
-
-        favouriteButton.addEventListener("click", () => {
-          let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
-
-          // Sjekk om filmen allerede finnes i favorittlisten
-          let exists = favourites.some((favMovie) => favMovie.id === movie.id);
-
-          if (exists) {
-            // Hvis filmen allerede finnes, fjern den fra listen
-            favourites = favourites.filter(
-              (favMovie) => favMovie.id !== movie.id
-            );
-          } else {
-            // Hvis filmen ikke allerede finnes, legg den til i listen
-            favourites.push(movie);
-          }
-
-          localStorage.setItem("favourites", JSON.stringify(favourites));
-
-          // Oppdater knappens tekst etter at favorittlisten er oppdatert
-          updateButtonText(favourites, movie, favouriteButton);
-        });
-
         // Oppdater knappens tekst når kortet blir laget
         let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
-        /*    let exists = favourites.some((favMovie) => favMovie.id === movie.id);
-        favouriteButton.textContent = exists
-          ? "Remove from favourites"
-          : "Add to favourites"; */
+        let exists = favourites.some((favMovie) => favMovie.title === movie.title);
+        favouriteButton.textContent = exists ? "Remove from favourites" : "Add to favourites";
 
         favouriteButton.addEventListener("click", () => {
           // Sjekk om filmen allerede finnes i favorittlisten
-          exists = favourites.some((favMovie) => favMovie.id === movie.id);
+          exists = favourites.some((favMovie) => favMovie.title === movie.title);
 
           if (exists) {
             // Hvis filmen allerede finnes, fjern den fra listen
-            favourites = favourites.filter(
-              (favMovie) => favMovie.id !== movie.id
-            );
+            favourites = favourites.filter((favMovie) => favMovie.title !== movie.title);
           } else {
             // Hvis filmen ikke allerede finnes, legg den til i listen
             favourites.push(movie);
@@ -111,12 +70,8 @@ function searchMovies(searchTerm) {
           localStorage.setItem("favourites", JSON.stringify(favourites));
 
           // Oppdater knappens tekst etter at favorittlisten er oppdatert
-          favouriteButton.textContent = exists
-            ? "Add to favourites"
-            : "Remove from favourites";
+          favouriteButton.textContent = exists ? "Add to favourites" : "Remove from favourites";
         });
-
-        userCardContainer.append(card);
 
         userCardContainer.append(card);
       });
