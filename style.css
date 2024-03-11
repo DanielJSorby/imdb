@@ -1,10 +1,9 @@
 html {
-  background-color: #fafbfb;
+  background-color: #e4543a;
   color: #e4543a;
 }
 
 body {
-  background-color: white;
   margin: 0;
   padding: 0;
   font-family: "Roboto", Arial, sans-serif;
@@ -17,9 +16,20 @@ h1 h2 h3 h4 h5 h6 {
   text-align: center;
 }
 
+/* IM-DB */
+
+.logo {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 6rem;
+  text-align: center;
+  color: #f5f5f5;
+  font-size: 5rem;
+}
+
 /* Search bar */
 .search-wrapper {
-  width: 100%;
+  width: 80%;
   max-width: 31.25rem;
   margin-left: auto;
   margin-right: auto;
@@ -77,6 +87,8 @@ margin: 2rem 0;
 .user-cards {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 70rem;
 }
 
 .card {
@@ -84,7 +96,7 @@ margin: 2rem 0;
   flex-direction: column;
   max-width: 10rem;
   margin: 2rem auto;
-  background: #fafbfb;
+  background-color: #fafbfb;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   border-radius: 0.625rem;
   padding: 3rem;
@@ -95,5 +107,27 @@ margin: 2rem 0;
   object-fit: cover;
   border-radius: 0.625rem;
   margin: 0 auto;
-  max-width: 10rem;
+  max-width: 100%;
+}
+
+/* Ui Elements */
+button {
+  width: 100%;
+  height: 2.8rem;
+  background: #e4543a;
+  color: #fff;
+  border: none;
+  border-radius: 1.625rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
 }
