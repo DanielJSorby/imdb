@@ -118,6 +118,43 @@ margin: 2rem 0;
   /*  border: 0.25rem solid #405c73; */
 }
 
+@media screen and (max-width: 1350px) {
+  .card {
+    font-size: 0.5rem;
+    max-width: 7rem;
+  }
+
+  .favourite-button {
+    font-size: 0.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .card {
+    font-size: 0.5rem;
+    max-width: 5rem;
+  }
+
+  .favourite-button {
+    font-size: 0.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .card {
+    font-size: 0.25rem;
+    max-width: 5rem;
+    padding: 1rem;
+  }
+
+  .favourite-button {
+    font-size: 0.5rem;
+    height: 1.5rem;
+  }
+}
+
 .thumbnail {
   object-fit: cover;
   border-radius: 0.625rem;
