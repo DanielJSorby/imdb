@@ -3,11 +3,9 @@ const userCardContainer = document.querySelector("[data-user-cards-container]");
 const searchInput = document.querySelector("[data-search]");
 const lastInnStart = 20;
 // URL til JSON-filen
-const url =
+var url =
   "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json";
 
-
-  
 // Funksjon for å søke gjennom filmene
 function searchMovies(searchTerm) {
   // Henter JSON-data fra URL
@@ -99,3 +97,20 @@ searchInput.addEventListener("input", (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   searchMovies("");
 });
+
+var selectYear = document.getElementById("year");
+selectYear.onchange = (event) => {
+  var inputText = event.target.value;
+  if (inputText === "All") {
+    url =
+      "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json";
+  } else {
+    url =
+      "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies-" +
+      inputText +
+      "s.json";
+  }
+  console.log(url);
+  searchMovies("");
+  return url;
+};
