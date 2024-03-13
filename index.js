@@ -6,6 +6,23 @@ const lastInnStart = 20;
 var url =
   "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json";
 
+var selectYear = document.getElementById("year");
+selectYear.onchange = (event) => {
+  var inputText = event.target.value;
+  if (inputText === "All") {
+    url =
+      "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json";
+  } else {
+    url =
+      "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies-" +
+      inputText +
+      "s.json";
+  }
+  console.log(url);
+  searchMovies("");
+  return url;
+};
+
 // Funksjon for å søke gjennom filmene
 function searchMovies(searchTerm) {
   // Henter JSON-data fra URL
@@ -97,20 +114,3 @@ searchInput.addEventListener("input", (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   searchMovies("");
 });
-
-var selectYear = document.getElementById("year");
-selectYear.onchange = (event) => {
-  var inputText = event.target.value;
-  if (inputText === "All") {
-    url =
-      "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json";
-  } else {
-    url =
-      "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies-" +
-      inputText +
-      "s.json";
-  }
-  console.log(url);
-  searchMovies("");
-  return url;
-};
