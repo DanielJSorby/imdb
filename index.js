@@ -1,6 +1,7 @@
 const userCardTemplate = document.querySelector("[data-user-template]");
 const userCardContainer = document.querySelector("[data-user-cards-container]");
 const searchInput = document.querySelector("[data-search]");
+const favouriteCheckbox = document.querySelector(".checkbox");
 const lastInnStart = 20;
 // URL til JSON-filen
 var url =
@@ -66,7 +67,7 @@ function searchMovies(searchTerm) {
 
         header.textContent = movie.title;
         body.textContent = "Year: " + movie.year;
-
+        // Favoritter
         // Oppdater knappens tekst når kortet blir laget
         let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
         let exists = favourites.some(
@@ -108,6 +109,14 @@ function searchMovies(searchTerm) {
 
 searchInput.addEventListener("input", (e) => {
   searchMovies(e.target.value);
+});
+
+favouriteCheckbox.addEventListener("change", (event) => {
+  if (event.target.checked) {
+    // Hvis checkboxen er huket av, viser vi favorittene
+  } else {
+    // Hvis checkboxen ikke er huket av, viser vi alle filmene
+  }
 });
 
 // Last inn lastInnStart antall filmer når siden lastes
