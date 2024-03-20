@@ -105,10 +105,21 @@ function searchMovies(searchTerm, onlyFavourites = false) {
 
       localStorage.setItem("favourites", JSON.stringify(favourites));
 
+      // Oppdater favourites variabelen med den nye listen med favoritter
+      favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+
+      // Sjekk om filmen allerede finnes i favorittlisten
+      exists = favourites.some((favMovie) => favMovie.title === movie.title);
+
       // Oppdater knappens tekst etter at favorittlisten er oppdatert
       favouriteButton.textContent = exists
-        ? "Add to favourites"
-        : "Remove from favourites";
+        ? "Remove from favourites"
+        : "Add to favourites";
+
+      localStorage.setItem("favourites", JSON.stringify(favourites));
+
+      // Oppdater favourites variabelen med den nye listen med favoritter
+      favourites = JSON.parse(localStorage.getItem("favourites")) || [];
     });
 
     userCardContainer.append(card);
