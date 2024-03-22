@@ -91,6 +91,7 @@ function searchMovies(searchTerm, onlyFavourites = false) {
 
     favouriteButton.addEventListener("click", () => {
       // Sjekk om filmen allerede finnes i favorittlisten
+      let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
       exists = favourites.some((favMovie) => favMovie.title === movie.title);
 
       if (exists) {
