@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <script>
+      // Hent filmdata fra localStorage
+      let movie = JSON.parse(localStorage.getItem("movie"));
+
+      // Fjern filmdata fra localStorage
+      localStorage.removeItem("movie");
+
+      // Vis filmens detaljer (som i den tidligere `showMovieDetails`-funksjonen)
+      let movieDiv = document.createElement("div");
+      let title = document.createElement("h1");
+      title.textContent = movie.title;
+      movieDiv.appendChild(title);
+      let year = document.createElement("p");
+      year.textContent = movie.year;
+      movieDiv.appendChild(year);
+      let description = document.createElement("p");
+      description.textContent = movie.description;
+      movieDiv.appendChild(description);
+      let image = document.createElement("img");
+      image.src = movie.image;
+      movieDiv.appendChild(image);
+      document.body.appendChild(movieDiv);
+    </script>
+  </body>
+</html>

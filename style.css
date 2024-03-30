@@ -118,6 +118,10 @@ margin: 2rem 0;
   /*  border: 0.25rem solid #405c73; */
 }
 
+.info {
+  display: none;
+}
+
 @media screen and (max-width: 1350px) {
   .card {
     font-size: 0.5rem;
@@ -451,5 +455,102 @@ svg #main-circ {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+/* Kort Full Skjerm */
+/* Kortet skal ta hele skjermen */
+
+/* .full-card.card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);ß
+  flex-direction: row;
+} */
+
+.full-card.card {
+  display: block;
+  max-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  color: white;
+  border-radius: 0;
+  padding: 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  /*  border: 0.25rem solid #405c73; */
+  transition: 0.3s;
+}
+
+.full-card .thumbnail {
+  object-fit: contain;
+}
+
+.full-card .info {
+  display: flex !important;
+}
+
+.item-1 {
+  text-decoration: none;
+  border: 0;
+  background-color: transparent;
+  height: 50px;
+  .inner {
+    display: block;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    &:before {
+      content: "";
+      position: absolute;
+      height: 2px;
+      width: 50px;
+      background-color: #fff;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      transition: ease-out 0.2s all;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      width: 50px;
+      background-color: #fff;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      transition: ease-out 0.2s all;
+    }
+  }
+  .label {
+    color: #fff;
+    opacity: 0;
+    transition: all 0.2s ease-out;
+  }
+  &:hover,
+  &:focus {
+    .inner {
+      &:before {
+        transform: translate(-50%, 0%) rotate(0);
+        top: 25%;
+      }
+      &:after {
+        transform: translate(-50%, 0%) rotate(0);
+        top: 76%;
+      }
+    }
+    .label {
+      opacity: 1;
+    }
   }
 }

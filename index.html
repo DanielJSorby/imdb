@@ -118,12 +118,19 @@
         </svg>
       </label>
     </div>
+
     <div class="user-cards" data-user-cards-container></div>
     <template data-user-template>
       <div class="card">
-        <img class="thumbnail" src="" alt="" data-thumbnail />
+        <button class="item-1">
+          <span class="inner">
+            <span class="label">Close</span>
+          </span>
+        </button>
+        <img class="thumbnail" src="" alt="" loading="lazy" data-thumbnail />
         <div class="header"><h1 data-header></h1></div>
         <div class="body" data-body></div>
+        <div class="info" data-info></div>
         <button type="button" class="favourite-button"></button>
       </div>
     </template>

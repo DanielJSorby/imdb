@@ -69,6 +69,7 @@ function searchMovies(searchTerm, onlyFavourites = false) {
     const header = card.querySelector("[data-header]");
     const body = card.querySelector("[data-body]");
     const thumbnail = card.querySelector("[data-thumbnail]");
+    const info = card.querySelector("[data-info]");
     const favouriteButton = card.querySelector(".favourite-button");
 
     if (movie.thumbnail === "" || movie.thumbnail === undefined) {
@@ -81,6 +82,7 @@ function searchMovies(searchTerm, onlyFavourites = false) {
 
     header.textContent = movie.title;
     body.textContent = "Year: " + movie.year;
+    info.textContent = movie.extract;
     // Favoritter
     // Oppdater knappens tekst når kortet blir laget
     let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
@@ -121,6 +123,27 @@ function searchMovies(searchTerm, onlyFavourites = false) {
 
       // Oppdater favourites variabelen med den nye listen med favoritter
       favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+    });
+
+    // Legg til en event listener på hvert kort
+    card.addEventListener("click", (event) => {
+      // Fjern klassen 'full-card' fra alle kort
+      document.querySelectorAll(".card.full-card").forEach((otherCard) => {
+        otherCard.classList.remove("full-card");
+      });
+
+      // Legg til klassen 'full-card' til dette kortet
+      card.classList.add("full-card");
+
+      // Forhindre at eventet bobler opp til document
+      event.stopPropagation();
+    });
+
+    // Legg til en event listener på document som fjerner 'full-card' klassen fra alle kort når det klikkes utenfor kortene
+    document.addEventListener("click", () => {
+      document.querySelectorAll(".card.full-card").forEach((card) => {
+        card.classList.remove("full-card");
+      });
     });
 
     userCardContainer.append(card);
