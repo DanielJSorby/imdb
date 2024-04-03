@@ -484,7 +484,6 @@ svg #main-circ {
   top: 0;
   left: 0;
   z-index: 1000;
-  overflow: auto;
   background-color: rgba(0, 0, 0, 0.8);
   /*  border: 0.25rem solid #405c73; */
   transition: 0.3s;
@@ -496,61 +495,23 @@ svg #main-circ {
 
 .full-card .info {
   display: flex !important;
+  max-width: 30%;
+  padding: 2rem;
 }
 
-.item-1 {
-  text-decoration: none;
-  border: 0;
-  background-color: transparent;
-  height: 50px;
-  .inner {
-    display: block;
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    &:before {
-      content: "";
-      position: absolute;
-      height: 2px;
-      width: 50px;
-      background-color: #fff;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      transition: ease-out 0.2s all;
-    }
-    &:after {
-      content: "";
-      position: absolute;
-      height: 2px;
-      width: 50px;
-      background-color: #fff;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) rotate(45deg);
-      transition: ease-out 0.2s all;
-    }
-  }
-  .label {
-    color: #fff;
-    opacity: 0;
-    transition: all 0.2s ease-out;
-  }
-  &:hover,
-  &:focus {
-    .inner {
-      &:before {
-        transform: translate(-50%, 0%) rotate(0);
-        top: 25%;
-      }
-      &:after {
-        transform: translate(-50%, 0%) rotate(0);
-        top: 76%;
-      }
-    }
-    .label {
-      opacity: 1;
-    }
-  }
+.full-card .favourite-button {
+  max-width: 10rem;
+}
+
+.full-card .main-things {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  /* max-width: 50%; */
+}
+
+.full-card .title-and-year {
+  display: flex;
+  flex-direction: column;
 }

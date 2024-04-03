@@ -36,7 +36,6 @@ function fetchMovies() {
     })
     .catch((error) => console.error("Error:", error));
 }
-
 // Funksjon for å søke gjennom filmene
 function searchMovies(searchTerm, onlyFavourites = false) {
   let result;
@@ -65,13 +64,16 @@ function searchMovies(searchTerm, onlyFavourites = false) {
 
   // Lager nye kort for hvert søke resultat
   result.forEach((movie) => {
+    // Variabler
     const card = userCardTemplate.content.cloneNode(true).children[0];
     const header = card.querySelector("[data-header]");
     const body = card.querySelector("[data-body]");
     const thumbnail = card.querySelector("[data-thumbnail]");
     const info = card.querySelector("[data-info]");
     const favouriteButton = card.querySelector(".favourite-button");
+    const exitButton = document.getElementById("exit-button");
 
+    // Sjekker om filmen har tumbnail eller ikke, og hvis den ikke har det, så vil den vise et standard bilde
     if (movie.thumbnail === "" || movie.thumbnail === undefined) {
       thumbnail.src = "./bilder/ingen-bilde.jpeg";
       thumbnail.alt = "Filmplakat ikke tilgjengelig";
@@ -127,23 +129,36 @@ function searchMovies(searchTerm, onlyFavourites = false) {
 
     // Legg til en event listener på hvert kort
     card.addEventListener("click", (event) => {
-      // Fjern klassen 'full-card' fra alle kort
-      document.querySelectorAll(".card.full-card").forEach((otherCard) => {
-        otherCard.classList.remove("full-card");
-      });
+      // Hvis det klikkede elementet ikke er favorittknappen, og kortet allerede har 'full-card' klassen
+      if (
+        !event.target.matches(".favorite-button") &&
+        card.classList.contains("full-card")
+      ) {
+        // Fjern 'full-card' klassen fra dette kortet
+        card.classList.remove("full-card");
+      } else {
+        // Fjern 'full-card' klassen fra alle andre kort
+        document.querySelectorAll(".card.full-card").forEach((otherCard) => {
+          if (otherCard !== card) {
+            otherCard.classList.remove("full-card");
+          }
+        });
 
-      // Legg til klassen 'full-card' til dette kortet
-      card.classList.add("full-card");
+        // Legg til 'full-card' klassen til dette kortet
+        card.classList.add("full-card");
+      }
 
       // Forhindre at eventet bobler opp til document
       event.stopPropagation();
     });
 
     // Legg til en event listener på document som fjerner 'full-card' klassen fra alle kort når det klikkes utenfor kortene
-    document.addEventListener("click", () => {
-      document.querySelectorAll(".card.full-card").forEach((card) => {
-        card.classList.remove("full-card");
-      });
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest('.card') && !event.target.matches('.favorite-button')) {
+        document.querySelectorAll(".card.full-card").forEach((card) => {
+          card.classList.remove("full-card");
+        });
+      }
     });
 
     userCardContainer.append(card);
@@ -152,6 +167,7 @@ function searchMovies(searchTerm, onlyFavourites = false) {
 // Kall fetchMovies funksjonen når siden lastes
 fetchMovies();
 
+// Legg til en event listener på søkefeltet som kaller searchMovies funksjonen med søkeordet som argument
 searchInput.addEventListener("input", (e) => {
   if (favouriteCheckbox.checked) {
     searchMovies(e.target.value, true);
@@ -160,6 +176,7 @@ searchInput.addEventListener("input", (e) => {
   }
 });
 
+// Sjekker om favouriteCheckbox er huket av, og hvis den er det, så vil du bare se favoritter
 favouriteCheckbox.addEventListener("change", (event) => {
   if (event.target.checked) {
     searchMovies(searchInput.value, true);
@@ -168,7 +185,7 @@ favouriteCheckbox.addEventListener("change", (event) => {
   }
 });
 
-// Last inn lastInnStart antall filmer når siden lastes
+// Last inn filmer når siden lastes inn
 document.addEventListener("DOMContentLoaded", () => {
   searchMovies("");
 });
