@@ -1,12 +1,13 @@
+// Velger elementer fra DOM
 const userCardTemplate = document.querySelector("[data-user-template]");
 const userCardContainer = document.querySelector("[data-user-cards-container]");
 const searchInput = document.querySelector("[data-search]");
 const favouriteCheckbox = document.querySelector(".checkbox");
-const lastInnStart = 20;
-// URL til JSON-filen
+const lastInnStart = 20; // Antall filmer som lastes inn ved oppstart
 var url =
-  "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json";
+  "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json"; // URL til JSON-filen
 
+// Funksjon for å endre URL basert på valgt år
 var selectYear = document.getElementById("year");
 selectYear.onchange = (event) => {
   var inputText = event.target.value;
@@ -20,26 +21,28 @@ selectYear.onchange = (event) => {
       "s.json";
   }
   console.log(url);
-  searchMovies("");
+  searchMovies(""); // Søker etter filmer igjen med den nye URLen
   return url;
 };
 
-var movies = [];
+var movies = []; // Array for å lagre filmene
 
 // Funksjon for å hente filmene
 function fetchMovies() {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      movies = data;
-      searchMovies("");
+      movies = data; // Lagrer filmene i movies array
+      searchMovies(""); // Søker etter filmer igjen med de nye filmene
     })
     .catch((error) => console.error("Error:", error));
 }
+
 // Funksjon for å søke gjennom filmene
 function searchMovies(searchTerm, onlyFavourites = false) {
   let result;
   if (onlyFavourites) {
+    // Hvis onlyFavourites er true, filtrer filmene til bare favorittene
     let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
     result = movies.filter((movie) =>
       favourites.some((favMovie) => favMovie.title === movie.title)
@@ -55,8 +58,7 @@ function searchMovies(searchTerm, onlyFavourites = false) {
     result = movies.filter((movie) =>
       movie.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    // Begrenser resultatene til de første 50
-    result = result.slice(0, 50);
+    result = result.slice(0, 50); // Begrenser resultatene til de første 50
   }
 
   // Tømmer userCardContainer
@@ -71,7 +73,6 @@ function searchMovies(searchTerm, onlyFavourites = false) {
     const thumbnail = card.querySelector("[data-thumbnail]");
     const info = card.querySelector("[data-info]");
     const favouriteButton = card.querySelector(".favourite-button");
-    const exitButton = document.getElementById("exit-button");
 
     // Sjekker om filmen har tumbnail eller ikke, og hvis den ikke har det, så vil den vise et standard bilde
     if (movie.thumbnail === "" || movie.thumbnail === undefined) {
@@ -85,6 +86,7 @@ function searchMovies(searchTerm, onlyFavourites = false) {
     header.textContent = movie.title;
     body.textContent = "Year: " + movie.year;
     info.textContent = movie.extract;
+
     // Favoritter
     // Oppdater knappens tekst når kortet blir laget
     let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
@@ -154,16 +156,20 @@ function searchMovies(searchTerm, onlyFavourites = false) {
 
     // Legg til en event listener på document som fjerner 'full-card' klassen fra alle kort når det klikkes utenfor kortene
     document.addEventListener("click", (event) => {
-      if (!event.target.closest('.card') && !event.target.matches('.favorite-button')) {
+      if (
+        !event.target.closest(".card") &&
+        !event.target.matches(".favorite-button")
+      ) {
         document.querySelectorAll(".card.full-card").forEach((card) => {
           card.classList.remove("full-card");
         });
       }
     });
 
-    userCardContainer.append(card);
+    userCardContainer.append(card); // Legger til kortet i containeren
   });
 }
+
 // Kall fetchMovies funksjonen når siden lastes
 fetchMovies();
 
