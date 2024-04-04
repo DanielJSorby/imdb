@@ -504,7 +504,7 @@ svg #main-circ {
 }
 
 .full-card .main-things {
-  display: flex;
+  display: block;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
