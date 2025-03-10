@@ -4,7 +4,7 @@ const userCardContainer = document.querySelector("[data-user-cards-container]");
 const searchInput = document.querySelector("[data-search]");
 const favouriteCheckbox = document.querySelector(".checkbox");
 const lastInnStart = 20; // Antall filmer som lastes inn ved oppstart
-var url =
+let url =
   "https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json"; // URL til JSON-filen
 
 // Funksjon for å endre URL basert på valgt år
